@@ -119,3 +119,12 @@ dmypy.json
 *.docx
 *.pdf
 CustomerBehaviourAnalysis.ipynb
+
+# Local model artifacts
+app/best_xgboost_model.joblib
+app/model_bundle.pkl
+
+# Frontend build / dependency folders
+purchase-predictor/node_modules/
+purchase-predictor/dist/
+purchase-predictor/.vite/

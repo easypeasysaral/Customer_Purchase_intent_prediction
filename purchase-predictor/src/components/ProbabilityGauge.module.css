@@ -1,0 +1,7 @@
+.wrap     { padding: 24px 20px 12px; text-align: center; }
+.label    { font-size: 10px; color: var(--text2); letter-spacing: 0.1em; margin-bottom: 14px; }
+.svgWrap  { position: relative; display: inline-block; }
+.svg      { display: block; }
+.value    { position: absolute; top: 54%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+.num      { display: block; font-size: 30px; font-weight: 800; line-height: 1; }
+.pctLabel { display: block; font-size: 10px; color: var(--text2); margin-top: 3px; }

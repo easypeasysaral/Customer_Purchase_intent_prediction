@@ -1,0 +1,88 @@
+/* ─── Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
+:root {
+  --bg:        #060B18;
+  --surface:   #0D1526;
+  --surface2:  #111D35;
+  --surface3:  #162240;
+  --border:    #1E2F50;
+  --border2:   #243660;
+
+  --cyan:      #00D4FF;
+  --cyan2:     #00A8CC;
+  --cyan-dim:  rgba(0, 212, 255, 0.1);
+  --cyan-glow: rgba(0, 212, 255, 0.2);
+
+  --orange:     #FF6B35;
+  --orange-dim: rgba(255, 107, 53, 0.1);
+
+  --green:     #00E676;
+  --green-dim: rgba(0, 230, 118, 0.1);
+
+  --red:       #FF4444;
+  --red-dim:   rgba(255, 68, 68, 0.1);
+
+  --amber:     #FFB300;
+
+  --text:      #E8F0FF;
+  --text2:     #8899BB;
+  --text3:     #4A607F;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
+/* ─── Grid background ────────────────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* ─── Keyframes ──────────────────────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 currentColor; }
+  50%       { opacity: 0.6; box-shadow: 0 0 0 4px transparent; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.fade-up  { animation: fade-up  0.4s ease both; }
+.scale-in { animation: scale-in 0.3s ease both; }
+
+/* ─── Utility ────────────────────────────────────────────────────────────── */
+.mono { font-family: 'JetBrains Mono', monospace; }
+.syne { font-family: 'Syne', sans-serif; }
