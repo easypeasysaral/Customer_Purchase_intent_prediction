@@ -180,14 +180,6 @@ Frontend available at `http://localhost:3000`
 
 ---
 
-### 4. Reproduce the model
-
-Open `CustomerBehaviourAnalysis.ipynb` in Jupyter or Google Colab to reproduce the full EDA, feature engineering, model training, and evaluation pipeline.
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1QI1eyiGfx6cw2o-QuuaOcZQ3K7zTHLjs)
-
----
-
 ## 📈 Results Summary
 
 ### Confusion Matrices (Test Set)
