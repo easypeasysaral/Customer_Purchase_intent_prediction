@@ -10,7 +10,6 @@ import joblib
 import pandas as pd
 import numpy as np
 
-# ─── Logging ──────────────────────────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s  %(levelname)s  %(message)s",
@@ -18,17 +17,14 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# ─── Shared model store ───────────────────────────────────────────────────────
 ml: dict = {}
 
-# ─── App ─────────────────────────────────────────────────────────────────────
 app = FastAPI(
     title="Customer Purchase Intent Predictor",
     description="Predicts whether an ecommerce session will end in a purchase.",
     version="2.0.0",
 )
 
-# ─── CORS ────────────────────────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -43,13 +39,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-# ─── Startup ─────────────────────────────────────────────────────────────────
 @app.on_event("startup")
 def load_model():
     logger.info("Loading model bundle...")
     try:
-        # Prefer the .joblib file (exported in this workspace); fall back to .pkl
+        
         p_joblib = Path("best_xgboost_model.joblib")
         p_pkl = Path("best_xgboost_model.pkl")
         if p_joblib.exists():
@@ -58,9 +52,7 @@ def load_model():
             bundle = joblib.load(p_pkl)
         else:
             raise FileNotFoundError("No model file found: expected best_xgboost_model.joblib or best_xgboost_model.pkl")
-        # Support two bundle shapes:
-        # 1) a dict with keys: model, scaler, features, meta
-        # 2) a model object (e.g., XGBClassifier) saved directly
+    
         if isinstance(bundle, dict):
             model_obj = bundle.get("model", bundle)
             scaler = bundle.get("scaler")
@@ -107,8 +99,6 @@ def unload_model():
     ml.clear()
     logger.info("Model released.")
 
-
-# ─── Schemas ─────────────────────────────────────────────────────────────────
 class SessionFeatures(BaseModel):
     session_duration:     float = Field(..., ge=0)
     session_length:       float = Field(..., ge=0)
@@ -136,13 +126,9 @@ class BatchResponse(BaseModel):
     will_purchase:        bool
     purchase_probability: float
 
-
-# ─── Helper: Pydantic v1 + v2 ────────────────────────────────────────────────
 def to_dict(obj):
     return obj.model_dump() if hasattr(obj, "model_dump") else obj.dict()
 
-
-# ─── Endpoints ───────────────────────────────────────────────────────────────
 @app.get("/health", tags=["Monitoring"])
 def health():
     return {
